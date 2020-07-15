@@ -9,6 +9,11 @@ export default new Router({
             path:'/',
             name:'Login',
             component:()=>import('@/components/Login')
+        },
+        {
+            path:'/cadastro',
+            name:'Cadastro',
+            component:()=>import('@/components/Cadastro')
         }
     ]
 })

@@ -1,7 +1,7 @@
 <template>
     <div class="row">
         <div class="col-sm-8">
-            <form>
+            <form @submit.prevent="salvar" >
             <h4>Novo Cadastro</h4>
                 <div class="form-group">
                     <label for="name" >Nome</label>
@@ -25,13 +25,15 @@
                 </div>
                 <div class="form-group float-right">
                     <router-link to="/" class="btn btn-outline-danger">Cancelar</router-link>
-                    <button type="button" class="btn btn-outline-success ml-3" >Salvar</button>
+                    <button type="submit" class="btn btn-outline-success ml-3" >Salvar</button>
                 </div>
             </form>
         </div>
     </div>
 </template>
 <script>
+import {mapActions} from 'vuex';
+
 export default {
     name:'Cadastro',
     data:()=>{
@@ -43,6 +45,15 @@ export default {
                 password:''
             },
             confirm:''
+        }
+    },
+    methods:{
+        ...mapActions(['saveAction']),
+        salvar(){
+            console.log(this.schema)
+            this.saveAction({data:this.schema,url:'user_save'});
+            this.$router.push('/');
+
         }
     }
 }

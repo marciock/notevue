@@ -14,6 +14,11 @@ export default new Router({
             path:'/cadastro',
             name:'Cadastro',
             component:()=>import('@/components/Cadastro')
+        },
+        {
+            path:'/dash',
+            name:'DashNotes',
+            component:()=>import('@/components/DashNotes')
         }
     ]
 })

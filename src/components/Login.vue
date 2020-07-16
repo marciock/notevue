@@ -7,22 +7,22 @@
             <div class="card shadow p-3 mb-5 bg-white rounded" >
                 <div class="card-body">
                     <h5 class="card-title ">Login</h5>
-                    <div class=" card-subtitle">barroso@gmail.com
+                    <div class=" card-subtitle">
                         <div class="form-group ">
                             <label for="email">Email</label>
                             <input type="mail" id="email"  class="form-control" v-model="schema.email" aria-describedby="emailHelp">
-                            <small id="emailHelp" class="form-text text-muted" v-if="this.error.field='email'">{{this.error.text}}</small>
+                            <small id="emailHelp" class="form-text text-muted" v-if="this.users.field==='email'">{{this.users.text}}</small>
                            
                         </div>
                         <div class="form-group">
                             <label for="password">senha</label>
                             <input type="password" id="password"  class="form-control" v-model="schema.password" aria-describedby="passwordHelp">
-                            <small id="passwordHelp" class="form-text text-muted" v-if="this.error.field='password'">{{this.error.text}}</small>
+                            <small id="passwordHelp" class="form-text text-muted" v-if="this.users.field==='password'">{{this.users.text}}</small>
                         </div>
                     </div>
                     <div class="form-group float-right">
                         <router-link to="/cadastro" class="card-link">Cadastrar</router-link>
-                        <button type="submit" class="btn btn-outline-success ml-3" >Entrar</button>
+                        <button type="submit" class="btn btn-outline-success ml-3"  >Entrar</button>
                     </div>
                 </div>
             </div>
@@ -36,6 +36,7 @@
 import {mapState} from 'vuex';
 import {mapActions} from 'vuex';
 
+
 export default {
     name:'Login',
     data:()=>{
@@ -47,17 +48,29 @@ export default {
         }
     },
     computed:{
-        ...mapState(['users','error']),
+        ...mapState(['users']),
     },
     methods:{
-        ...mapActions(['loginAction']),
+        ...mapActions(['loginAction','refreshAction']),
+        
+        
         entrar(){
-            this.loginAction({schema:this.schema,url:'login'});
-            //this.$router.push('/dash');
+           this.loginAction({schema:this.schema,url:'login'});
 
-          // console.log(this.users.data.field);
-        }
-    }
+              // console.log(this.users);
+              
+
+
+           
+        },
+        
+
+    },
+    
+    
+   
+    
+    
 }
 </script>
 <style >

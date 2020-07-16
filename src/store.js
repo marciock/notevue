@@ -1,22 +1,23 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-
+import routes from './routes';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
             
         state:{
-            users:[],
-            error:{error:'',field:'',text:''},
+            users:{error:true,field:'',text:''},
+            
             notes:[]
         },
         mutations:{
-            multLogin(state,loginAction){
+            mutLogin(state,loginAction){
                 state.users=loginAction
             },
-            multError(state,loginAction){
-                state.users=loginAction
+            mutRefresh(state,refreshAction){
+                state.users=refreshAction
             }
+            
 
         },
         actions:{
@@ -31,20 +32,39 @@ export default new Vuex.Store({
             },
             loginAction: async ({commit}, payload)=>{
                 const schema=payload.schema;
-                //const email=payload.email;
-                const url=payload.url;
-
-                let result=await Vue.http.post(url,schema);
-                console.log(result.data);
-                if(result.data.error ===true){
-                    await commit('multLogin',result.data);
-                }
-                else{
-                    await commit('multLogin',result.data);
-                }
                 
+                const url=payload.url;
+       
+
+               let result= await Vue.http.post(url,schema);
+                
+               if(result.data.error===false){
+                   // commit('mutLogin',result.data);
+                    
+                   sessionStorage.setItem('id',result.data.id);
+                   sessionStorage.setItem('name',result.data.name);
+                   sessionStorage.setItem('lastname',result.data.lastname);
+                   sessionStorage.setItem('email',result.data.email);
+                   sessionStorage.setItem('password',result.data.password);
+
+
+                   routes.push('/dash').catch(()=>{})
+                }else{
+                    commit('mutLogin',result.data);
+                }
+                      
+                   
+            
+
+            } ,
+            refreshAction({commit}){
+                let user={error:true,field:'',text:''};
+                return commit('mutRefresh',user);
             }
 
+                
+            
         }
+       
     
 })

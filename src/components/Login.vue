@@ -1,6 +1,6 @@
 <template>
 
-    <div>
+    <div class="container">
         <form @submit.prevent="entrar()">
        <div class="row mt-5">
            <div class="col-sm-8">

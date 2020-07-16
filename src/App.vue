@@ -1,14 +1,17 @@
 <template>
   <div id="app">
-    <div class="container mt-2">
+   
       <router-view></router-view>
-    </div>
+    
   </div>
 </template>
 
 <script>
 import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.css'
+import 'jquery';
+import  'popper.js';
+import 'bootstrap/dist/js/bootstrap';
 
 
 export default {

@@ -7,8 +7,8 @@ export default new Vuex.Store({
             
         state:{
             users:{error:true,field:'',text:''},
-            
-            notes:[]
+            notes:[],
+            idNote:{}
         },
         mutations:{
             mutLogin(state,loginAction){
@@ -16,7 +16,14 @@ export default new Vuex.Store({
             },
             mutRefresh(state,refreshAction){
                 state.users=refreshAction
-            }
+            },
+            mutShowNoteUser(state,showNotes){
+                state.notes=showNotes
+            },
+           mutEditUser(state,editUserAction){
+               state.users=editUserAction
+           }
+            
             
 
         },
@@ -53,13 +60,36 @@ export default new Vuex.Store({
                     commit('mutLogin',result.data);
                 }
                       
-                   
-            
+         
 
             } ,
             refreshAction({commit}){
                 let user={error:true,field:'',text:''};
                 return commit('mutRefresh',user);
+            },
+            clear: async()=>{
+                sessionStorage.clear();
+                console.log('saiu')
+               
+               // let user={error:true,field:'',text:''};
+               //  commit('mutRefresh',user);
+                await routes.push('/').catch(()=>{})
+            },
+            showNotes: async ({commit})=>{
+                    let user=sessionStorage.getItem('id');
+                    let show=await Vue.http.get('show_notes_user',{params:{user}});
+                  //  console.log(show.body);
+                    commit('mutShowNoteUser',show.body);
+
+
+            },
+            editUserAction: async ({commit},payload)=>{
+                const id=payload.id;
+                const url=payload.url;
+
+                const result=await Vue.http.get(url,{params:{id}})
+                commit('mutEditUser',result.body);
+
             }
 
                 

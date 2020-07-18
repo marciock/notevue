@@ -19,6 +19,11 @@ export default new Router({
             path:'/dash',
             name:'DashNotes',
             component:()=>import('@/components/DashNotes')
+        },
+        {
+            path:'/perfil',
+            name:'CadastroEdit',
+            component:()=>import('@/components/CadastroEdit')
         }
     ]
 })

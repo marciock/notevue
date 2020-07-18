@@ -9,19 +9,20 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
             <li class="nav-item ">
-                <a class="nav-link " href="#/dash" > <span class="fa fa-file"></span></a>
+                <button class="nav-link  btn btn-outline-light"  data-toggle="modal" data-target="#exampleModal"> <span class="fa fa-file"></span></button>
             </li>
            
            
             <li class="nav-item dropdown">
                 <a  class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="fa fa-user-circle-o"></span > Olá {{users.name}}
+                <span class="fa fa-user-circle-o"></span > Olá {{schema.name}}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <div class="dropdown-item text-center" >{{users.name}} {{users.lastname}}</div>
-                <div class="dropdown-item text-center" >{{users.email}}</div>
+                <div class="dropdown-item text-center" >{{schema.name}} {{schema.lastname}}</div>
+                <div class="dropdown-item text-center" >{{schema.email}}</div>
+                <div class="dropdown-item text-center" ><button type="button" class="btn btn-primary rounded-pill" @click="edit()">Gerencie sua Conta</button></div>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#/dash" >Sair</a>
+                <button class="dropdown-item"  v-on:click="clear()">Sair</button>
                 </div>
             </li>
             
@@ -36,11 +37,14 @@
 
 </template>
 <script>
+import {mapActions} from 'vuex';
+import {mapState} from 'vuex';
+
 export default {
     name:'NavBar',
     data:()=>{
         return{
-            users:{
+            schema:{
                 id:sessionStorage.getItem('id'),
                 name:sessionStorage.getItem('name'),
                 lastname:sessionStorage.getItem('lastname'),
@@ -48,6 +52,20 @@ export default {
                 
             }
         }
-    }
+    },
+    computed:{
+        ...mapState(['users'])
+    },
+    methods:{
+        ...mapActions(['clear','editUserAction']),
+        edit(){
+            const data={id:this.users.id,url:'user_edit'};
+             
+            this.editUserAction(data)
+
+            this.$router.push('/perfil')
+        }
+        
+    },
 }
 </script>

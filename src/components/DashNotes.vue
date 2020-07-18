@@ -4,7 +4,7 @@
         <div class="container mt-3">
             <div class="row" >
                 <div class="col-sm-" v-for="note in notes" :key="note.id" >
-                    <Note :title="note.title" :note="note.note" :email="note.u.email"  />
+                    <Note :title="note.title" :note="note.note" :email="note.u.email" :Id="note.id"  />
                 </div>
             </div>
         </div>

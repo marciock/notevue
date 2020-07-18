@@ -20,7 +20,7 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <div class="dropdown-item text-center" >{{schema.name}} {{schema.lastname}}</div>
                 <div class="dropdown-item text-center" >{{schema.email}}</div>
-                <div class="dropdown-item text-center" ><button type="button" class="btn btn-primary rounded-pill" @click="edit()">Gerencie sua Conta</button></div>
+                <div class="dropdown-item text-center" ><router-link to="/perfil" class="btn btn-primary rounded-pill" >Gerencie sua Conta</router-link></div>
                 <div class="dropdown-divider"></div>
                 <button class="dropdown-item"  v-on:click="clear()">Sair</button>
                 </div>
@@ -38,7 +38,7 @@
 </template>
 <script>
 import {mapActions} from 'vuex';
-import {mapState} from 'vuex';
+//import {mapState} from 'vuex';
 
 export default {
     name:'NavBar',
@@ -53,18 +53,10 @@ export default {
             }
         }
     },
-    computed:{
-        ...mapState(['users'])
-    },
+    
     methods:{
-        ...mapActions(['clear','editUserAction']),
-        edit(){
-            const data={id:this.users.id,url:'user_edit'};
-             
-            this.editUserAction(data)
-
-            this.$router.push('/perfil')
-        }
+        ...mapActions(['clear']),
+        
         
     },
 }

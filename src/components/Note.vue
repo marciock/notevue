@@ -11,23 +11,32 @@
                 </ul>
             </h6>
             <p class="card-text">{{note}}</p>
-            <a href="#/dash" class="card-link bnt btn-outline-warning "><span class="fa fa-pencil"></span></a>
+            <a href="#/dash" class="card-link bnt btn-outline-warning " data-toggle="modal" data-target="#editModal" @click="edit()" ><span class="fa fa-pencil"></span></a>
             <a href="#/dash" class="card-link bnt btn-outline-danger " @click="del()"><span class="fa fa-trash"></span></a>
             </div>
         </div>
+        <EditNote />
     </div>
 </template>
 <script>
+import EditNote from './EditNote';
+
 import {mapActions} from 'vuex';
 
 export default {
     name:'Note',
+    components:{EditNote},
     props:['title','note','created','updated','email','Id'],
     methods:{
-        ...mapActions(['delNoteActions']),
+        ...mapActions(['delNoteActions','editNoteActions']),
         del(){
             let id={id:this.Id};
             this.delNoteActions(id);
+        },
+        edit(){
+            const id={id:this.Id}
+            //console.log(this.Id)
+            this.editNoteActions(id);
         }
     }
 }

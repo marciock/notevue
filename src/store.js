@@ -8,7 +8,8 @@ export default new Vuex.Store({
         state:{
             users:{error:true,field:'',text:''},
             notes:[],
-            idNote:{}
+            idNote:{},
+            note:{}
         },
         mutations:{
             mutLogin(state,loginAction){
@@ -22,7 +23,10 @@ export default new Vuex.Store({
             },
            mutEditUser(state,editUserAction){
                state.users=editUserAction
-           }
+           },
+           mutEditNote(state,editNoteAction){
+            state.note=editNoteAction
+        }
             
             
 
@@ -111,10 +115,26 @@ export default new Vuex.Store({
             delNoteActions(context,payload){
                 const id=payload.id;
                 //const url=payload.url;
-                 Vue.http.post('note_del',id).then(res=>{
+                 Vue.http.get('note_del',{params:{id}}).then(res=>{
                      console.log(res)
                  });
                 
+            },
+            editNoteActions: async ({commit},payload)=>{
+                const id= await payload.id;
+                
+
+                const result=await Vue.http.get('note_edit',{params:{id}})
+                commit('mutEditNote',result.data);
+
+                //console.log(result.data)
+            },
+            updateNoteActions:async (context,payload)=>{
+
+                const data= await payload;
+                const result= await Vue.http.post('note_up',data);
+
+                return result;
             }
 
                 

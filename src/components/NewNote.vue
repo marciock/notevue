@@ -51,11 +51,12 @@ export default {
        
     },
     methods:{
-        ...mapActions(['saveAction']),
+        ...mapActions(['saveAction','statusActions']),
         save(){
    
             const data={data:this.schema,url:'note_save'};
            this.saveAction(data);
+           this.statusActions('success')
           
            $('#exampleModal').modal('hide')
    

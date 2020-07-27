@@ -34,24 +34,33 @@ export default {
         }
     },
     computed:{
-        ...mapState(['users','notes']),
+        ...mapState(['users','notes','status']),
         
     },
     methods:{
-        ...mapActions(['showNotes']),
+        ...mapActions(['showNotes','statusActions']),
     },
     created(){
         this.showNotes();
+
+         
         
     },
     watch:{
          
-            notes: function(){
-               // console.log(this.notes);
-                this.showNotes()
+            status: function(newValue,oldValue){
+                console.log(newValue+' '+oldValue);
+              
+              if(newValue != oldValue){
+                  this.showNotes()
+                  this.statusActions('')
+              }
+                
 
-           }
-    }
+               
+            }
+    },
+    
    
     
    

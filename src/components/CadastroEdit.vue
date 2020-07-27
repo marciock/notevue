@@ -52,7 +52,7 @@ export default {
         ...mapState(['users'])
     },
     methods:{
-        ...mapActions(['editUserAction','updateUserAction']),
+        ...mapActions(['editUserAction','updateUserAction','satusActions']),
         save(){
            
             if(!this.senha ){
@@ -70,11 +70,12 @@ export default {
                  this.updateUserAction(data);
             }
 
-            
         },
         edit(){
              const data={id:sessionStorage.getItem('id'),url:'user_edit'};
-             this.editUserAction(data)
+             this.editUserAction(data);
+             this.satusActions('success')
+
         }
     },
     created(){

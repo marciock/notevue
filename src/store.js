@@ -9,7 +9,8 @@ export default new Vuex.Store({
             users:{error:true,field:'',text:''},
             notes:[],
             idNote:{},
-            note:{}
+            note:{},
+            status:''
         },
         mutations:{
             mutLogin(state,loginAction){
@@ -26,8 +27,11 @@ export default new Vuex.Store({
            },
            mutEditNote(state,editNoteAction){
             state.note=editNoteAction
-        }
-            
+        },
+        
+            mutStatus(state,statusActions){
+                state.status=statusActions
+            }
             
 
         },
@@ -119,6 +123,8 @@ export default new Vuex.Store({
                      console.log(res)
                  });
 
+                // commit('mutStatus','delete')
+
                 
                 
             },
@@ -137,6 +143,10 @@ export default new Vuex.Store({
                 const result= await Vue.http.post('note_up',data);
 
                 return result;
+            },
+            statusActions({commit},status){
+                let val=status;
+                commit('mutStatus',val);
             }
 
                 

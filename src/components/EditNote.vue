@@ -45,12 +45,13 @@ export default {
    },
    
     methods:{
-        ...mapActions(['updateNoteActions']),
+        ...mapActions(['updateNoteActions','statusActions']),
       
         save(){
             
          // console.log(this.note)
           this.updateNoteActions(this.note);
+          this.statusActions('success')
            $('#editModal').modal('hide')
             
 

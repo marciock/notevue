@@ -23,6 +23,7 @@ import EditNote from './EditNote';
 
 import {mapActions} from 'vuex';
 
+
 export default {
     name:'Note',
     components:{EditNote},
@@ -34,17 +35,20 @@ export default {
     
     props:['title','note','created','updated','email','Id'],
     
+    
     methods:{
-        ...mapActions(['delNoteActions','editNoteActions']),
+        ...mapActions(['delNoteActions','editNoteActions','showNotes','statusActions']),
         del(){
             let id={id:this.Id};
             this.delNoteActions(id);
-            
+          
+                this.statusActions('success')
         },
         edit(){
             const id={id:this.Id}
             //console.log(this.Id)
             this.editNoteActions(id);
+            //this.statusActions('delete')
         },
         
     },

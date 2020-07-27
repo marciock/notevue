@@ -6,8 +6,8 @@
             <h6 class="card-subtitle mb-2 text-muted">
                 <ul>
                     <li> {{email}} </li>
-                    <li> Criado em {{created}}</li>
-                    <li> Última Atualização {{updated}}</li>
+                    <li> Criado em {{new Date(created).toLocaleDateString(options)}}</li>
+                    <li> Última Atualização {{new Date(updated).toLocaleDateString(options)}}</li>
                 </ul>
             </h6>
             <p class="card-text">{{note}}</p>
@@ -26,18 +26,28 @@ import {mapActions} from 'vuex';
 export default {
     name:'Note',
     components:{EditNote},
+    data:()=>{
+        return{
+            options:{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
+        }
+    },
+    
     props:['title','note','created','updated','email','Id'],
+    
     methods:{
         ...mapActions(['delNoteActions','editNoteActions']),
         del(){
             let id={id:this.Id};
             this.delNoteActions(id);
+            
         },
         edit(){
             const id={id:this.Id}
             //console.log(this.Id)
             this.editNoteActions(id);
-        }
-    }
+        },
+        
+    },
+    
 }
 </script>

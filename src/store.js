@@ -118,6 +118,8 @@ export default new Vuex.Store({
                  Vue.http.get('note_del',{params:{id}}).then(res=>{
                      console.log(res)
                  });
+
+                
                 
             },
             editNoteActions: async ({commit},payload)=>{

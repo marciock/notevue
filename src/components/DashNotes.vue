@@ -4,7 +4,9 @@
         <div class="container mt-3">
             <div class="row" >
                 <div class="col-sm-" v-for="note in notes" :key="note.id" >
-                    <Note :title="note.title" :note="note.note" :email="note.u.email" :Id="note.id"  />
+                    <Note :title="note.title" :note="note.note" :email="note.u.email" :Id="note.id" 
+                    :created="note.createdAt" 
+                    :updated="note.updatedAt" />
                 </div>
             </div>
         </div>
@@ -40,10 +42,17 @@ export default {
     },
     created(){
         this.showNotes();
+        
     },
-    updated(){
-      this.showNotes();
+    watch:{
+         
+            notes: function(){
+               // console.log(this.notes);
+                this.showNotes()
+
+           }
     }
+   
     
    
 

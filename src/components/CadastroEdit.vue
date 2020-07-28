@@ -52,29 +52,23 @@ export default {
         ...mapState(['users'])
     },
     methods:{
-        ...mapActions(['editUserAction','updateUserAction','satusActions']),
+        ...mapActions(['editUserAction','updateUserAction','statusActions']),
         save(){
            
-            if(!this.senha ){
-                //let newUsers=Object.assign({password:this.senha},this.users)
-                
-               console.log(this.users.password);
-               let data={data:this.users,url:'user_up'};
-                this.updateUserAction(data);
-                
-            }else{
+           
                 this.users.password=this.senha;
 
-                console.log(this.users.password)
+                //console.log(this.senha)
                  let data={data:this.users,url:'user_up'};
                  this.updateUserAction(data);
-            }
+                 this.statusActions('success')
+            
 
         },
         edit(){
              const data={id:sessionStorage.getItem('id'),url:'user_edit'};
              this.editUserAction(data);
-             this.satusActions('success')
+             //this.satusActions('success')
 
         }
     },

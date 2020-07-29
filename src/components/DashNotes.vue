@@ -42,7 +42,7 @@ export default {
     },
     created(){
         this.showNotes();
-
+        
          
         
     },
@@ -50,7 +50,7 @@ export default {
          
             status: function(newValue,oldValue){
                 console.log(newValue+' '+oldValue);
-              
+              console.log(this.status)
               if(newValue != oldValue){
                   this.showNotes()
                   this.statusActions('')
@@ -60,6 +60,9 @@ export default {
                
             }
     },
+    destroyed(){
+        this.showNotes()
+    }
     
    
     

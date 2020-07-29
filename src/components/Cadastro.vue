@@ -54,7 +54,7 @@ export default {
         salvar(){
             console.log(this.schema)
             this.saveAction({data:this.schema,url:'user_save'});
-            this.statusActions('success')
+           // this.statusActions('success')
 
             this.$router.push('/');
 
